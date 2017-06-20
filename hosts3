@@ -1,0 +1,9 @@
+[all]
+10.67.24.4
+
+[all:vars]
+username=admin
+password=C1sco123
+transport=cli
+ansible_connection=local
+ansible_python_interpreter = /Users/khabib/dev/DevNetExpress/ansible/bin/python

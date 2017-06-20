@@ -1,0 +1,15 @@
+---
+- hosts: all
+  vars: 
+    provider:
+      host: "{{ inventory_hostname }}"
+      transport: "{{ transport }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+  tasks:
+    - name: interface description
+      ios_config:
+        provider: "{{ provider }}"
+        lines:
+          - description test interface DEVNET
+        parents: "interface {{ inter }}"

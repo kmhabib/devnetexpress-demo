@@ -1,0 +1,22 @@
+---
+- hosts: all
+  vars: 
+    provider:
+      host: "{{ inventory_hostname }}"
+      transport: "{{ transport }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+  tasks:
+    - name: gather facts
+      register: iosfacts
+      ios_facts:
+        provider: "{{ provider }}"
+        
+    - name: interface description
+      ios_config:
+        provider: "{{ provider }}"
+        lines:
+          - description test interface
+        parents: "interface {{ item.key }}"
+      with_dict: "{{ iosfacts.ansible_facts.ansible_net_interfaces }}"
+      when: item.value.bandwidth == 10000
